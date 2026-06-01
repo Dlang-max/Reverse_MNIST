@@ -96,7 +96,7 @@ class NeuralNetwork:
         """
         weight_updates = []
 
-        # Find the last layer's delta and update its weights
+        # Find the last layer's delta and update its gradient 
         error_derivative = output - desired     # TODO: replace this with variable loss function (e.g. MSE, SIGNUM, ...)
         activation_function_derivative = activation_function_derivatives[self.activation_functions[-1]]
         prev_delta = error_derivative * activation_function_derivative(output)
@@ -110,6 +110,6 @@ class NeuralNetwork:
 
             prev_delta = curr_delta
 
-        # Update weight matrices
+        # Update weight matrices using gradients
         for i in range(len(self.weight_matrices) - 1, -1, -1):
             self.weight_matrices[i] -= weight_updates[i]
